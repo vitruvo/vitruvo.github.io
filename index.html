@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam Viewer</title>
+    <style>
+        body {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            background: #333;
+            color:#eee;
+        }
+        .webcam {
+            display: inline-grid;
+            width: calc(20%);
+            text-align: center;
+        }
+        .webcam img {
+            max-width: 100%;
+        }
+        h3{
+            font-family: monospace;
+            margin: 0;
+            background: #000;
+            margin-top:5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="webcams-container"></div>
+
+    <script>
+        const webcams = [
+            { title: "Kristiansand", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1029002_1" },
+            { title: "Monankrysset", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=3000611_1" },
+            { title: "Osestad", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1029005_1" },
+            { title: "Vatland", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1029001_1" },
+            { title: "Sælebo", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1129013_1" },
+            { title: "Torger Carlsensgate", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=3000036_2" },
+            { title: "Kiellandsmyra", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1129038_1" },
+            { title: "Mekjarvik", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1129026_1" },
+            { title: "Mindelokket", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=3000049_1" },
+            { title: "Bergen", url: "https://btweb.vosskom.no/bt_nygaardstangen.jpg" },
+            { title: "Bergen", url: "https://btweb.vosskom.no/bt_floyen_vest.jpg" },
+            { title: "Eidesmoen", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1229055_1" },
+            { title: "Flåm", url: "https://webcam.flam.no/flam/flam15.jpg" },
+            { title: "Borgund", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=1429011_1" },
+            { title: "Breistolen", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=3000007_1" },
+            { title: "Fjellbu", url: "https://www.fjellbu.no/webcam/webcam.jpg" },
+            { title: "Lillehammer", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0529004_1" },
+            { title: "Lillehammer", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0529012_1" },
+            { title: "Feiring", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0200030_1" },
+            { title: "Djupdalen", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0229018_1" },
+            { title: "Oslo", url: "https://www.oslohavn.no/webcam/vippetangen.jpg" },
+            { title: "Oslo", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0329034_1" },
+            { title: "Lierskogen", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0629001_1" },
+            { title: "Hanekleiva", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0729011_1" },
+            { title: "Osterholtheia", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0929002_1" },
+            { title: "Haslestad", url: "https://webkamera.atlas.vegvesen.no/public/kamera?id=0929001_1" },
+
+            // Add more webcam objects here
+        ];
+
+        function updateWebcams() {
+            const container = document.getElementById("webcams-container");
+            container.innerHTML = "";
+
+            webcams.forEach(webcam => {
+                const webcamDiv = document.createElement("div");
+                webcamDiv.classList.add("webcam");
+
+                const titleElement = document.createElement("h3");
+                titleElement.textContent = webcam.title;
+
+                const imageElement = document.createElement("img");
+                imageElement.src = webcam.url+'#'+performance.now();
+
+                webcamDiv.appendChild(titleElement);
+                webcamDiv.appendChild(imageElement);
+                container.appendChild(webcamDiv);
+            });
+        }
+
+        updateWebcams();
+        window.addEventListener('resize', updateWebcams); // Update on window resize
+         setInterval(updateWebcams, 15000); // Update every 15 seconds
+    </script>
+</body>
+</html>
